@@ -236,3 +236,48 @@ addCategoryBtn.addEventListener("click", () => {
   categorySelect.value = newCat;
   customCategory.value = "";
 });
+
+// ELEMENTS
+const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdownList = document.getElementById("dropdownList");
+const hiddenCategory = document.getElementById("category");
+
+// TOGGLE DROPDOWN
+dropdownBtn.addEventListener("click", () => {
+  dropdownList.classList.toggle("show");
+});
+
+// SELECT CATEGORY
+dropdownList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("dropdown-item")) {
+    const value = e.target.textContent;
+
+    dropdownBtn.textContent = value;
+    hiddenCategory.value = value;
+
+    dropdownList.classList.remove("show");
+  }
+});
+
+// CLOSE WHEN CLICK OUTSIDE
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".dropdown")) {
+    dropdownList.classList.remove("show");
+  }
+});
+
+const customCategory = document.getElementById("customCategory");
+const addCategoryBtn = document.getElementById("addCategoryBtn");
+
+addCategoryBtn.addEventListener("click", () => {
+  const newCat = customCategory.value.trim();
+  if (!newCat) return;
+
+  const item = document.createElement("div");
+  item.classList.add("dropdown-item");
+  item.textContent = newCat;
+
+  dropdownList.appendChild(item);
+
+  customCategory.value = "";
+});
