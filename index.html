@@ -56,19 +56,19 @@ required
   <option value="Fun">Fun</option>
 </select>
 
-<div class="custom-category">
-  <input
-    type="text"
-    id="customCategory"
-    placeholder="Add new category"
-  />
-
-  <button type="button" id="addCategoryBtn">
-    Add Category
+<div class="dropdown">
+  <button type="button" class="dropdown-btn" id="dropdownBtn">
+    Select Category
   </button>
+
+  <div class="dropdown-content" id="dropdownList">
+    <div class="dropdown-item">Food</div>
+    <div class="dropdown-item">Transport</div>
+    <div class="dropdown-item">Fun</div>
+  </div>
 </div>
 
-<section class="controls">
+<input type="hidden" id="category" />
 
 <select id="sortOption">
 <option value="default">Sort By</option>
