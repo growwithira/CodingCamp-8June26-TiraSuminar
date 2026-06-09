@@ -49,26 +49,27 @@ required
 >
 
 <select id="category" required>
-<select id="category" required>
-  <option value="">Select Category</option>
-  <option value="Food">Food</option>
-  <option value="Transport">Transport</option>
-  <option value="Fun">Fun</option>
+<option value="">Select Category</option>
+<option value="Food">Food</option>
+<option value="Transport">Transport</option>
+<option value="Fun">Fun</option>
 </select>
 
-<div class="dropdown">
-  <button type="button" class="dropdown-btn" id="dropdownBtn">
-    Select Category
-  </button>
+<input
+type="text"
+id="customCategory"
+placeholder="Or Custom Category"
+>
 
-  <div class="dropdown-content" id="dropdownList">
-    <div class="dropdown-item">Food</div>
-    <div class="dropdown-item">Transport</div>
-    <div class="dropdown-item">Fun</div>
-  </div>
-</div>
+<button type="submit">
+Add Transaction
+</button>
 
-<input type="hidden" id="category" />
+</form>
+
+</section>
+
+<section class="controls">
 
 <select id="sortOption">
 <option value="default">Sort By</option>
@@ -100,4 +101,3 @@ required
 
 </body>
 </html>
-
