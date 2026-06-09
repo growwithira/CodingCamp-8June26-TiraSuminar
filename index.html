@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Expense & Budget Visualizer</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<h1>Expense & Budget Visualizer</h1>
+
+<button id="themeToggle">
+🌙 Dark Mode
+</button>
+</header>
+
+<div class="balance-card">
+<h2>Total Spending</h2>
+<p id="totalBalance">Rp 0</p>
+</div>
+
+<section class="form-section">
+
+<h3>Add Transaction</h3>
+
+<form id="expenseForm">
+
+<input
+type="text"
+id="itemName"
+placeholder="Item Name"
+required
+>
+
+<input
+type="number"
+id="amount"
+placeholder="Amount"
+required
+>
+
+<select id="category" required>
+<option value="">Select Category</option>
+<option value="Food">Food</option>
+<option value="Transport">Transport</option>
+<option value="Fun">Fun</option>
+</select>
+
+<input
+type="text"
+id="customCategory"
+placeholder="Or Custom Category"
+>
+
+<button type="submit">
+Add Transaction
+</button>
+
+</form>
+
+</section>
+
+<section class="controls">
+
+<select id="sortOption">
+<option value="default">Sort By</option>
+<option value="amount">Amount</option>
+<option value="category">Category</option>
+</select>
+
+</section>
+
+<section class="transaction-section">
+
+<h3>Transactions</h3>
+
+<div id="transactionList"></div>
+
+</section>
+
+<section class="chart-section">
+
+<h3>Spending Distribution</h3>
+
+<canvas id="expenseChart"></canvas>
+
+</section>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
 
