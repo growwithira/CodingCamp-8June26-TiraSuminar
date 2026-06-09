@@ -203,23 +203,15 @@ themeToggle.textContent =
 
 render();
 
-const categorySelect = document.getElementById("category");
-const customCategory = document.getElementById("customCategory");
-const addCategoryBtn = document.getElementById("addCategoryBtn");
-
 addCategoryBtn.addEventListener("click", () => {
   const newCat = customCategory.value.trim();
 
   if (!newCat) return;
 
-  // cek biar tidak duplicate
-  let exists = false;
-
-  Array.from(categorySelect.options).forEach(opt => {
-    if (opt.value.toLowerCase() === newCat.toLowerCase()) {
-      exists = true;
-    }
-  });
+  // cek duplicate
+  let exists = Array.from(categorySelect.options).some(opt =>
+    opt.value.toLowerCase() === newCat.toLowerCase()
+  );
 
   if (exists) {
     alert("Category already exists!");
@@ -232,8 +224,15 @@ addCategoryBtn.addEventListener("click", () => {
 
   categorySelect.appendChild(option);
 
-  // auto select category baru
-  categorySelect.value = newCat;
+  // 🔥 SORT semua option biar jadi 1 list rapi
+  const options = Array.from(categorySelect.options);
 
+  options.sort((a, b) => a.textContent.localeCompare(b.textContent));
+
+  categorySelect.innerHTML = "";
+
+  options.forEach(opt => categorySelect.appendChild(opt));
+
+  categorySelect.value = newCat;
   customCategory.value = "";
 });
