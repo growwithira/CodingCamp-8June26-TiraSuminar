@@ -203,3 +203,37 @@ themeToggle.textContent =
 
 render();
 
+const categorySelect = document.getElementById("category");
+const customCategory = document.getElementById("customCategory");
+const addCategoryBtn = document.getElementById("addCategoryBtn");
+
+addCategoryBtn.addEventListener("click", () => {
+  const newCat = customCategory.value.trim();
+
+  if (!newCat) return;
+
+  // cek biar tidak duplicate
+  let exists = false;
+
+  Array.from(categorySelect.options).forEach(opt => {
+    if (opt.value.toLowerCase() === newCat.toLowerCase()) {
+      exists = true;
+    }
+  });
+
+  if (exists) {
+    alert("Category already exists!");
+    return;
+  }
+
+  const option = document.createElement("option");
+  option.value = newCat;
+  option.textContent = newCat;
+
+  categorySelect.appendChild(option);
+
+  // auto select category baru
+  categorySelect.value = newCat;
+
+  customCategory.value = "";
+});
