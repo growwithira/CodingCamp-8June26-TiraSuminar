@@ -136,3 +136,11 @@ text-align:center;
 
 }
 
+.custom-category{
+  display:flex;
+  gap:10px;
+}
+
+.custom-category input{
+  flex:1;
+}
