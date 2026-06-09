@@ -49,25 +49,24 @@ required
 >
 
 <select id="category" required>
-<option value="">Select Category</option>
-<option value="Food">Food</option>
-<option value="Transport">Transport</option>
-<option value="Fun">Fun</option>
+<select id="category" required>
+  <option value="">Select Category</option>
+  <option value="Food">Food</option>
+  <option value="Transport">Transport</option>
+  <option value="Fun">Fun</option>
 </select>
 
-<input
-type="text"
-id="customCategory"
-placeholder="Or Custom Category"
->
+<div class="custom-category">
+  <input
+    type="text"
+    id="customCategory"
+    placeholder="Add new category"
+  />
 
-<button type="submit">
-Add Transaction
-</button>
-
-</form>
-
-</section>
+  <button type="button" id="addCategoryBtn">
+    Add Category
+  </button>
+</div>
 
 <section class="controls">
 
