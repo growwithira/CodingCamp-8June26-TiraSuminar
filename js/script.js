@@ -3,10 +3,114 @@ const list = document.getElementById("transactionList");
 const totalBalance = document.getElementById("totalBalance");
 const sortOption = document.getElementById("sortOption");
 
+const categorySelect =
+document.getElementById("category");
+
+const customCategoryInput =
+document.getElementById("customCategory");
+
+const addCategoryBtn =
+document.getElementById("addCategoryBtn");
+
 let transactions =
-JSON.parse(localStorage.getItem("transactions")) || [];
+JSON.parse(
+localStorage.getItem("transactions")
+) || [];
+
+let customCategories =
+JSON.parse(
+localStorage.getItem("customCategories")
+) || [];
 
 let chart;
+
+/* =========================
+   CUSTOM CATEGORY
+========================= */
+
+function loadCustomCategories(){
+
+customCategories.forEach(category=>{
+
+const exists =
+[...categorySelect.options].some(
+option =>
+option.value.toLowerCase() ===
+category.toLowerCase()
+);
+
+if(!exists){
+
+const option =
+document.createElement("option");
+
+option.value = category;
+option.textContent = category;
+
+categorySelect.appendChild(option);
+
+}
+
+});
+
+}
+
+function saveCustomCategories(){
+
+localStorage.setItem(
+"customCategories",
+JSON.stringify(customCategories)
+);
+
+}
+
+addCategoryBtn.addEventListener("click",()=>{
+
+const newCategory =
+customCategoryInput.value.trim();
+
+if(!newCategory){
+
+alert("Please enter a category");
+
+return;
+}
+
+const exists =
+[...categorySelect.options].some(
+option =>
+option.value.toLowerCase() ===
+newCategory.toLowerCase()
+);
+
+if(exists){
+
+alert("Category already exists");
+
+return;
+}
+
+customCategories.push(newCategory);
+
+saveCustomCategories();
+
+const option =
+document.createElement("option");
+
+option.value = newCategory;
+option.textContent = newCategory;
+
+categorySelect.appendChild(option);
+
+categorySelect.value = newCategory;
+
+customCategoryInput.value = "";
+
+});
+
+/* =========================
+   TRANSACTIONS
+========================= */
 
 form.addEventListener("submit", function(e){
 
@@ -21,17 +125,19 @@ document.getElementById("amount").value
 );
 
 let category =
-document.getElementById("category").value;
+categorySelect.value;
 
 const custom =
-document.getElementById("customCategory").value;
+customCategoryInput.value.trim();
 
-if(custom.trim() !== ""){
+if(custom !== ""){
 category = custom;
 }
 
 if(!item || !amount || !category){
+
 alert("Please fill all fields");
+
 return;
 }
 
@@ -49,6 +155,7 @@ saveData();
 form.reset();
 
 render();
+
 });
 
 function render(){
@@ -66,7 +173,7 @@ div.innerHTML = `
 <div class="info">
 <strong>${t.item}</strong>
 <span>${t.category}</span>
-<span>Rp ${t.amount.toLocaleString()}</span>
+<span>Rp ${t.amount.toLocaleString("id-ID")}</span>
 </div>
 
 <button
@@ -82,16 +189,20 @@ list.appendChild(div);
 
 updateBalance();
 updateChart();
+
 }
 
 function deleteTransaction(id){
 
 transactions =
-transactions.filter(t => t.id !== id);
+transactions.filter(
+t => t.id !== id
+);
 
 saveData();
 
 render();
+
 }
 
 function updateBalance(){
@@ -105,6 +216,7 @@ transactions.reduce(
 totalBalance.textContent =
 "Rp " +
 total.toLocaleString("id-ID");
+
 }
 
 function saveData(){
@@ -113,12 +225,17 @@ localStorage.setItem(
 "transactions",
 JSON.stringify(transactions)
 );
+
 }
+
+/* =========================
+   CHART
+========================= */
 
 function updateChart(){
 
 const categories = {};
-    
+
 transactions.forEach(t=>{
 
 categories[t.category] =
@@ -153,7 +270,12 @@ data
 }
 
 });
+
 }
+
+/* =========================
+   SORTING
+========================= */
 
 sortOption.addEventListener("change",()=>{
 
@@ -164,8 +286,9 @@ transactions.sort(
 );
 
 }
-
-if(sortOption.value === "category"){
+else if(
+sortOption.value === "category"
+){
 
 transactions.sort(
 (a,b)=>
@@ -179,7 +302,12 @@ b.category
 render();
 
 saveData();
+
 });
+
+/* =========================
+   DARK MODE
+========================= */
 
 const themeToggle =
 document.getElementById("themeToggle");
@@ -188,7 +316,9 @@ themeToggle.addEventListener("click",()=>{
 
 document.body.classList.toggle("dark");
 
-if(document.body.classList.contains("dark")){
+if(
+document.body.classList.contains("dark")
+){
 
 themeToggle.textContent =
 "☀️ Light Mode";
@@ -197,8 +327,14 @@ themeToggle.textContent =
 
 themeToggle.textContent =
 "🌙 Dark Mode";
+
 }
 
 });
 
+/* =========================
+   INITIAL LOAD
+========================= */
+
+loadCustomCategories();
 render();
