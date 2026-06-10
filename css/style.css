@@ -49,6 +49,11 @@ padding:10px 15px;
 border-radius:10px;
 background:var(--primary);
 color:white;
+transition:.2s;
+}
+
+button:hover{
+opacity:.9;
 }
 
 .balance-card{
@@ -88,7 +93,45 @@ select{
 padding:12px;
 border-radius:10px;
 border:1px solid #ccc;
+font-size:1rem;
 }
+
+/* =========================
+   CUSTOM CATEGORY
+========================= */
+
+.custom-category-wrapper{
+display:flex;
+gap:10px;
+width:100%;
+}
+
+.custom-category-wrapper input{
+flex:1;
+}
+
+.add-category-btn{
+width:55px;
+min-width:55px;
+padding:0;
+font-size:24px;
+font-weight:bold;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:10px;
+background:var(--primary);
+color:white;
+transition:.2s;
+}
+
+.add-category-btn:hover{
+transform:scale(1.05);
+}
+
+/* =========================
+   TRANSACTIONS
+========================= */
 
 #transactionList{
 max-height:300px;
@@ -112,6 +155,7 @@ background:#3a3a3a;
 .info{
 display:flex;
 flex-direction:column;
+gap:4px;
 }
 
 .delete-btn{
@@ -119,9 +163,21 @@ background:#d9534f;
 padding:8px 12px;
 }
 
+.delete-btn:hover{
+opacity:.9;
+}
+
+/* =========================
+   CHART
+========================= */
+
 canvas{
 margin-top:20px;
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
@@ -132,6 +188,16 @@ gap:10px;
 
 h1{
 text-align:center;
+}
+
+.custom-category-wrapper{
+gap:8px;
+}
+
+.add-category-btn{
+width:50px;
+min-width:50px;
+font-size:22px;
 }
 
 }
